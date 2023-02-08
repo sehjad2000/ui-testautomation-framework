@@ -106,7 +106,7 @@ public class WebDriverBuilder extends DeviceConfig {
 		} else if (platformName.equalsIgnoreCase(PlatformName.ZAP_PROXY.name())) {
 			if (host != null) {
 				String completeUrl = "http://" + host + ":4444/wd/hub";
-
+				System.out.println("In ZAP Proxy MOde "+host);
 				capabilities = OptionsManager.getChromeOptions()
 						.setProxy(ZapScan.createZapProxyConfigurationForWebDriver());
 				driver = new RemoteWebDriver(new URL(completeUrl), capabilities);
