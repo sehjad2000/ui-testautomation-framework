@@ -104,9 +104,19 @@ public class WebDriverBuilder extends DeviceConfig {
 				log.info("IE local driver initialized");
 			}
 		} else if (platformName.equalsIgnoreCase(PlatformName.ZAP_PROXY.name())) {
+			if (host != null) {
+				String completeUrl = "http://" + host + ":4444/wd/hub";
+
+				capabilities = OptionsManager.getChromeOptions()
+						.setProxy(ZapScan.createZapProxyConfigurationForWebDriver());
+				driver = new RemoteWebDriver(new URL(completeUrl), capabilities);
+				System.out.println("zap proxy remote driver initialized");
+				log.info("zap proxy remote driver initialized");
+			}
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver(OptionsManager.getChromeOptions()
 					.setProxy(ZapScan.createZapProxyConfigurationForWebDriver()));
+
 			driver.manage().window().maximize();
 			log.info("Chrome local driver initialized With ZAP Proxy");
 		}
